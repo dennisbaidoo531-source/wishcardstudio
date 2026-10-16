@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6c4cf1">
+<meta name="description" content="Create beautiful personalized birthday, anniversary, wedding, thank-you and celebration cards with WISH CARD STUDIO.">
+<title>WISH CARD STUDIO | Create Something Thoughtful</title>
+<style>
+  :root{--ink:#211b36;--muted:#716b83;--purple:#6c4cf1;--pink:#ff6f9f;--paper:#fffdfb;--line:#ece8f5}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#faf8ff}
+  button,input,textarea,select{font:inherit}
+  button{cursor:pointer}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(18px,5vw,72px);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.04em}
+  .brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));font-size:22px}
+  .brand small{display:block;font-size:10px;letter-spacing:.19em;color:var(--muted);margin-top:3px}
+  .top-actions{display:flex;gap:10px;align-items:center}
+  .btn{border:0;border-radius:13px;padding:12px 17px;font-weight:750;transition:transform .15s,opacity .15s}
+  .btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--purple);color:#fff;box-shadow:0 8px 18px #6c4cf12b}.btn-light{background:#f2efff;color:#5036cb}.btn-outline{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .hero{padding:54px 20px 32px;text-align:center;background:radial-gradient(ellipse at top,#eee8ff 0,transparent 65%)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e9e2ff;color:#5c43d5;border-radius:99px;padding:8px 13px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  h1{font-size:clamp(34px,5vw,62px);line-height:1.03;letter-spacing:-.045em;margin:18px auto 14px;max-width:800px}
+  h1 span{background:linear-gradient(100deg,#6c4cf1,#ff6f9f);background-clip:text;-webkit-background-clip:text;color:transparent}
+  .hero p{max-width:610px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.7}
+  .workspace{max-width:1250px;margin:22px auto 70px;padding:0 20px;display:grid;grid-template-columns:minmax(280px,390px) minmax(0,1fr);gap:24px;align-items:start}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 14px 45px #33205d08}
+  .panel h2{font-size:18px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 22px;line-height:1.5}
+  .field{margin:17px 0}.field label{display:block;font-size:12px;font-weight:800;color:#625a75;margin-bottom:8px}
+  .field input,.field textarea,.field select{width:100%;border:1px solid #e7e2f0;border-radius:12px;padding:12px 13px;background:#fff;color:var(--ink);outline:none}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:#9b88ff;box-shadow:0 0 0 3px #6c4cf11a}
+  .field textarea{min-height:100px;resize:vertical;line-height:1.5}
+  .occasion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .occasion{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px 4px;color:#5f5871;font-size:12px;font-weight:750}
+  .occasion span{display:block;font-size:23px;margin-bottom:5px}.occasion.active{border-color:#9d8aff;background:#f4f0ff;color:#563bd5;box-shadow:inset 0 0 0 1px #9d8aff}
+  .color-row{display:flex;gap:10px;align-items:center}.color-row input[type=color]{width:48px;height:42px;padding:4px;border:1px solid var(--line);border-radius:10px;background:#fff}.color-row select{flex:1}
+  .template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .template{height:66px;border:2px solid transparent;border-radius:12px;display:grid;place-items:center;font-size:22px;position:relative}
+  .template.active{border-color:var(--purple);box-shadow:0 0 0 2px #6c4cf126}
+  .template:nth-child(1){background:linear-gradient(135deg,#ffe0ed,#fff2c8)}.template:nth-child(2){background:linear-gradient(135deg,#d9f7ee,#dfe8ff)}.template:nth-child(3){background:linear-gradient(135deg,#241b48,#8c70db)}.template:nth-child(4){background:linear-gradient(135deg,#fff0d9,#ffc9ae)}.template:nth-child(5){background:linear-gradient(135deg,#f0e2ff,#ffd7f0)}.template:nth-child(6){background:linear-gradient(135deg,#d9edff,#c5e7e2)}
+  .preview-panel{padding:24px;min-width:0}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:17px}.preview-head h2{font-size:18px;margin:0}.live{font-size:12px;color:#248b69;font-weight:750;display:flex;align-items:center;gap:6px}.live:before{content:"";width:7px;height:7px;border-radius:50%;background:#36c994}
+  .canvas-wrap{padding:clamp(12px,3vw,36px);border-radius:20px;background-color:#f3f0fa;background-image:radial-gradient(#ded7ef 1px,transparent 1px);background-size:16px 16px;display:grid;place-items:center;min-height:430px}
+  .wish-card{width:min(100%,650px);aspect-ratio:1.42;min-height:260px;position:relative;overflow:hidden;border-radius:20px;padding:clamp(22px,5vw,54px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#ffe0ed,#fff2c8);box-shadow:0 24px 45px #35245b25;color:#45264b;isolation:isolate}
+  .wish-card:before,.wish-card:after{content:"✦  ·  ✧  ·  ✦";position:absolute;font-size:clamp(16px,3vw,25px);letter-spacing:.35em;opacity:.6;z-index:-1}
+  .wish-card:before{top:20px;left:20px}.wish-card:after{bottom:20px;right:20px}
+  .card-emoji{font-size:clamp(27px,5vw,48px);margin-bottom:8px;line-height:1}
+  .card-kicker{font-size:clamp(9px,1.5vw,12px);letter-spacing:.25em;text-transform:uppercase;font-weight:850;margin-bottom:13px;opacity:.8}
+  .card-title{font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,5.5vw,57px);line-height:1.02;letter-spacing:-.03em;margin:0 0 12px;overflow-wrap:anywhere}
+  .card-to{font-size:clamp(12px,2vw,17px);font-weight:800;margin-bottom:10px}
+  .card-message{font-family:Georgia,"Times New Roman",serif;font-size:clamp(12px,1.8vw,17px);line-height:1.5;max-width:440px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .card-from{font-size:clamp(10px,1.5vw,13px);font-weight:800;margin-top:17px;letter-spacing:.05em}
+  .wish-card.theme-midnight{background:linear-gradient(135deg,#241b48,#5c3a92);color:#fff8e8}
+  .wish-card.theme-ocean{background:linear-gradient(135deg,#d9f7ee,#dfe8ff);color:#164b58}
+  .wish-card.theme-sunset{background:linear-gradient(135deg,#fff0d9,#ffc9ae);color:#713a2f}
+  .wish-card.theme-rose{background:linear-gradient(135deg,#f0e2ff,#ffd7f0);color:#622c68}
+  .wish-card.theme-sky{background:linear-gradient(135deg,#d9edff,#c5e7e2);color:#204a66}
+  .preview-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.preview-actions .btn{flex:1;min-width:130px}
+  .hint{font-size:12px;color:var(--muted);line-height:1.6;margin:14px 2px 0}
+  .features{max-width:1100px;margin:0 auto 65px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .feature{padding:22px;border:1px solid var(--line);background:#fff;border-radius:18px}.feature .icon{font-size:26px}.feature h3{font-size:15px;margin:12px 0 6px}.feature p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+  footer{text-align:center;padding:26px 18px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);background:#fff}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#211b36;color:#fff;padding:12px 17px;border-radius:12px;box-shadow:0 8px 30px #0002;transition:.25s;z-index:10;font-size:13px;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+  @media(max-width:850px){.workspace{grid-template-columns:1fr;max-width:700px}.preview-panel{padding:18px}.canvas-wrap{min-height:320px}.features{grid-template-columns:1fr}}
+  @media(max-width:480px){.topbar{padding:13px 15px}.brand{font-size:12px}.brand-mark{width:36px;height:36px}.top-actions .btn{padding:10px;font-size:12px}.hero{padding-top:38px}.workspace{padding:0 12px}.panel{padding:18px}.preview-head{align-items:flex-start;flex-direction:column}.canvas-wrap{padding:10px;min-height:260px}.wish-card{aspect-ratio:1.05;min-height:300px;padding:24px 18px}.card-title{font-size:clamp(30px,9vw,44px)}}
+
+  .account-status{font-size:11px;color:var(--muted);margin-top:4px;font-weight:600;letter-spacing:0}
+  .photo-upload{display:flex;flex-direction:column;gap:9px;border:1px dashed #cfc5f2;background:#faf8ff;border-radius:14px;padding:14px}
+  .photo-upload input{padding:8px;background:#fff}
+  .photo-note{font-size:11px;color:var(--muted);line-height:1.5}
+  .card-photo{display:none;width:clamp(64px,12vw,112px);height:clamp(64px,12vw,112px);object-fit:cover;border-radius:50%;border:4px solid #ffffffaa;box-shadow:0 5px 18px #0002;margin:0 0 12px}
+  .card-photo.visible{display:block}
+  .modal-backdrop{position:fixed;inset:0;background:#211b36a8;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}
+  .modal-backdrop.open{display:flex}
+  .account-modal{background:#fff;width:min(100%,430px);border-radius:22px;padding:25px;box-shadow:0 25px 80px #0003}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+  .modal-head h2{margin:0;font-size:21px}
+  .close-modal{border:0;background:#f2efff;border-radius:10px;width:36px;height:36px;font-size:20px;color:#5036cb}
+  .account-tabs{display:flex;gap:8px;margin:18px 0}
+  .account-tabs button{flex:1;border:1px solid var(--line);background:#fff;padding:10px;border-radius:11px;font-weight:750;color:var(--muted)}
+  .account-tabs button.active{background:#f2efff;color:#5036cb;border-color:#c8bbff}
+  .account-message{font-size:12px;line-height:1.5;color:var(--muted);margin-top:12px}
+  .account-message.warning{color:#9a4b13}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">✦</div><div>WISH CARD STUDIO<small>WELCOME TO KDB INTERFACE FOR WISHES</small></div></div>
+  <div class="top-actions"><button class="btn btn-outline" id="accountBtn">👤 Account</button><button class="btn btn-light" id="randomBtn">Surprise me ✨</button></div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">✦ WELCOME TO KDB INTERFACE FOR WISHES</div>
+  <h1>Make a wish. <span>Make it beautiful.</span></h1>
+  <p>Create a thoughtful card for every moment worth celebrating. Personalize it, download it, and share a little happiness with the world.</p>
+</section>
+
+<main class="workspace">
+  <section class="panel" aria-label="Card editor">
+    <h2>Design your card</h2>
+    <p class="sub">Make it personal. Your preview updates as you type.</p>
+
+    <div class="field">
+      <label>1. CHOOSE AN OCCASION</label>
+      <div class="occasion-grid">
+        <button class="occasion active" data-occasion="Birthday" data-emoji="🎂"><span>🎂</span>Birthday</button>
+        <button class="occasion" data-occasion="Anniversary" data-emoji="💐"><span>💐</span>Anniversary</button>
+        <button class="occasion" data-occasion="Thank You" data-emoji="💛"><span>💛</span>Thank You</button>
+        <button class="occasion" data-occasion="Wedding" data-emoji="💍"><span>💍</span>Wedding</button>
+        <button class="occasion" data-occasion="Congratulations" data-emoji="🎉"><span>🎉</span>Congrats</button>
+        <button class="occasion" data-occasion="Just Because" data-emoji="🌷"><span>🌷</span>Just Because</button>
+      </div>
+    </div>
+
+    <div class="field"><label for="recipient">2. WHO IS IT FOR?</label><input id="recipient" maxlength="60" placeholder="e.g. Ama, Best Friend, Mum" value="Someone Amazing"></div>
+    <div class="field"><label for="message">YOUR MESSAGE</label><textarea id="message" maxlength="400">Wishing you a day filled with laughter, love, and all the little things that make you smile. May this new chapter bring you beautiful surprises!</textarea></div>
+    <div class="field"><label for="sender">FROM</label><input id="sender" maxlength="60" placeholder="Your name" value="With love"></div>
+    <div class="field">
+      <label for="photoInput">ADD YOUR PICTURE (OPTIONAL)</label>
+      <div class="photo-upload">
+        <input id="photoInput" type="file" accept="image/*">
+        <button class="btn btn-outline" type="button" id="removePhotoBtn">Remove picture</button>
+        <div class="photo-note">Choose a picture from your device. It appears on your card and is included in the downloaded PNG. Images are processed in this browser and are not uploaded to a server.</div>
+      </div>
+    </div>
+
+    <div class="field"><label>3. PICK A STYLE</label>
+      <div class="template-grid">
+        <button class="template active" data-theme="blush" aria-label="Blush theme">🌸</button>
+        <button class="template" data-theme="ocean" aria-label="Ocean theme">🌿</button>
+        <button class="template" data-theme="midnight" aria-label="Midnight theme">🌙</button>
+        <button class="template" data-theme="sunset" aria-label="Sunset theme">☀️</button>
+        <button class="template" data-theme="rose" aria-label="Rose theme">💜</button>
+        <button class="template" data-theme="sky" aria-label="Sky theme">🦋</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="titleInput">CARD HEADLINE</label>
+      <input id="titleInput" maxlength="70" value="Happy Birthday!">
+    </div>
+    <button class="btn btn-primary" id="resetBtn" style="width:100%">Reset this card ↺</button>
+  </section>
+
+  <section class="panel preview-panel" aria-label="Live card preview">
+    <div class="preview-head"><h2>Your card preview</h2><span class="live">LIVE PREVIEW</span></div>
+    <div class="canvas-wrap">
+      <article class="wish-card" id="wishCard">
+        <img class="card-photo" id="cardPhoto" alt="Uploaded card picture"><div class="card-emoji" id="cardEmoji">🎂</div>
+        <div class="card-kicker" id="cardKicker">A WISH MADE JUST FOR YOU</div>
+        <h2 class="card-title" id="cardTitle">Happy Birthday!</h2>
+        <div class="card-to" id="cardTo">To: Someone Amazing</div>
+        <div class="card-message" id="cardMessage">Wishing you a day filled with laughter, love, and all the little things that make you smile. May this new chapter bring you beautiful surprises!</div>
+        <div class="card-from" id="cardFrom">WITH LOVE · With love</div>
+      </article>
+    </div>
+    <div class="preview-actions">
+      <button class="btn btn-primary" id="downloadBtn">↓ Download PNG</button>
+      <button class="btn btn-light" id="saveOnlineBtn">☁ Save online</button>
+      <button class="btn btn-light" id="shareBtn">↗ Create share link</button>
+      <button class="btn btn-outline" id="copyBtn">▣ Copy link</button>
+    </div>
+    <p class="hint">Save online to store a card in your Firebase project and create a public share link. Download PNG works without signing in.</p>
+  </section>
+</main>
+
+<section class="features">
+  <div class="feature"><div class="icon">🎨</div><h3>Your style, your story</h3><p>Choose an occasion, a look, and words that feel right for your special person.</p></div>
+  <div class="feature"><div class="icon">🖼️</div><h3>Ready to save</h3><p>Export your finished card as a PNG image to keep, print, or send.</p></div>
+  <div class="feature"><div class="icon">💌</div><h3>Share the happiness</h3><p>Create a link to your design and share it in a message or on social media.</p></div>
+</section>
+<footer>© <span id="year"></span> WISH CARD STUDIO · Made to share a little happiness ✦</footer>
+<div class="modal-backdrop" id="accountModal" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+  <div class="account-modal">
+    <div class="modal-head"><h2 id="accountTitle">Your Wish Card Studio account</h2><button class="close-modal" id="closeAccount" aria-label="Close">×</button></div>
+    <p class="sub">Create a local demo profile to personalize your studio on this device.</p>
+    <div class="account-tabs"><button id="signupTab" class="active" type="button">Create account</button><button id="loginTab" type="button">Sign in</button></div>
+    <form id="accountForm">
+      <div class="field"><label for="accountName">YOUR NAME</label><input id="accountName" autocomplete="name" maxlength="70" placeholder="Your name" required></div>
+      <div class="field"><label for="accountEmail">EMAIL ADDRESS</label><input id="accountEmail" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="accountPassword">PASSWORD</label><input id="accountPassword" type="password" autocomplete="new-password" minlength="6" placeholder="At least 6 characters" required></div>
+      <button class="btn btn-primary" id="accountSubmit" type="submit" style="width:100%">Create account</button>
+    </form>
+    <div class="account-message" id="accountMessage">Your account is protected by Firebase Authentication. Use a unique password.</div>
+    <button class="btn btn-outline" id="signOutBtn" type="button" style="width:100%;margin-top:12px;display:none">Sign out</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const defaults = {
+    occasion:"Birthday", emoji:"🎂", recipient:"Someone Amazing",
+    message:"Wishing you a day filled with laughter, love, and all the little things that make you smile. May this new chapter bring you beautiful surprises!",
+    sender:"With love", theme:"blush", title:"Happy Birthday!", photoData:""
+  };
+  let state = {...defaults};
+  const themeClasses = ["theme-midnight","theme-ocean","theme-sunset","theme-rose","theme-sky"];
+  const occasionDefaults = {
+    "Birthday": ["🎂","Happy Birthday!","Wishing you a day filled with laughter, love, and all the little things that make you smile. May this new chapter bring you beautiful surprises!"],
+    "Anniversary": ["💐","Happy Anniversary!","Celebrating your love and the beautiful memories you continue to create. Wishing you many more years of happiness together."],
+    "Thank You": ["💛","Thank You!","Your kindness means more than words can say. Thank you for being thoughtful, generous, and wonderfully you."],
+    "Wedding": ["💍","Congratulations!","May your life together be filled with lasting love, shared laughter, and countless beautiful beginnings."],
+    "Congratulations": ["🎉","You Did It!","Your hard work deserves to be celebrated. Here's to this wonderful achievement and all the great things still ahead!"],
+    "Just Because": ["🌷","Just Because","No special occasion needed to remind you that you matter. Sending a little joy your way, just because."]
+  };
+  const occasionKicker = {
+    "Birthday":"A WISH MADE JUST FOR YOU","Anniversary":"CHEERS TO YOUR LOVE",
+    "Thank You":"WITH A GRATEFUL HEART","Wedding":"A BEAUTIFUL BEGINNING",
+    "Congratulations":"CELEBRATING YOU","Just Because":"A LITTLE NOTE OF JOY"
+  };
+  function notify(message) {
+    const toast = $("toast"); toast.textContent = message; toast.classList.add("show");
+    clearTimeout(notify.timer); notify.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+  function render() {
+    $("cardEmoji").textContent = state.emoji;
+    const photo = $("cardPhoto");
+    if (state.photoData) { photo.src = state.photoData; photo.classList.add("visible"); }
+    else { photo.removeAttribute("src"); photo.classList.remove("visible"); }
+    $("cardKicker").textContent = occasionKicker[state.occasion] || "A WISH MADE JUST FOR YOU";
+    $("cardTitle").textContent = state.title || "A little wish for you";
+    $("cardTo").textContent = "To: " + (state.recipient.trim() || "Someone Special");
+    $("cardMessage").textContent = state.message;
+    $("cardFrom").textContent = "WITH LOVE · " + (state.sender.trim() || "Someone who cares");
+    $("wishCard").className = "wish-card" + (state.theme === "blush" ? "" : " theme-" + state.theme);
+    document.querySelectorAll(".occasion").forEach(b => b.classList.toggle("active", b.dataset.occasion === state.occasion));
+    document.querySelectorAll(".template").forEach(b => b.classList.toggle("active", b.dataset.theme === state.theme));
+  }
+  function readInputs() {
+    state.recipient = $("recipient").value;
+    state.message = $("message").value;
+    state.sender = $("sender").value;
+    state.title = $("titleInput").value;
+    render();
+  }
+  ["recipient","message","sender","titleInput"].forEach(id => $(id).addEventListener("input", readInputs));
+  document.querySelectorAll(".occasion").forEach(button => button.addEventListener("click", () => {
+    state.occasion = button.dataset.occasion;
+    state.emoji = button.dataset.emoji;
+    state.title = occasionDefaults[state.occasion][1];
+    state.message = occasionDefaults[state.occasion][2];
+    $("titleInput").value = state.title; $("message").value = state.message;
+    render();
+  }));
+  document.querySelectorAll(".template").forEach(button => button.addEventListener("click", () => {
+    state.theme = button.dataset.theme; render();
+  }));
+  function cardData() { return {...state}; }
+  function encodeState() {
+    const bytes = new TextEncoder().encode(JSON.stringify(cardData()));
+    let binary = ""; bytes.forEach(b => binary += String.fromCharCode(b));
+    return btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+  }
+  function decodeState(encoded) {
+    try {
+      const base64 = encoded.replace(/-/g,"+").replace(/_/g,"/");
+      const binary = atob(base64);
+      const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+      const parsed = JSON.parse(new TextDecoder().decode(bytes));
+      if (!parsed || typeof parsed !== "object" || !occasionDefaults[parsed.occasion]) return false;
+      state = {...defaults,...parsed};
+      $("recipient").value = state.recipient; $("message").value = state.message;
+      $("sender").value = state.sender; $("titleInput").value = state.title;
+      render(); return true;
+    } catch (_) { return false; }
+  }
+  function shareUrl() {
+    const url = new URL(window.location.href);
+    url.hash = "card=" + encodeState();
+    return url.toString();
+  }
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); }
+    catch (_) {
+      const input = document.createElement("textarea"); input.value = text;
+      input.style.position = "fixed"; input.style.opacity = "0"; document.body.appendChild(input);
+      input.select(); const ok = document.execCommand("copy"); input.remove();
+      if (!ok) throw new Error("Copy failed");
+    }
+  }
+  $("shareBtn").addEventListener("click", async () => {
+    const url = shareUrl();
+    try {
+      if (navigator.share) await navigator.share({title:"A wish from WISH CARD STUDIO", text:"I made a card for you!", url});
+      else { await copyText(url); notify("Share link copied! Send it to someone special."); }
+    } catch (error) { if (error.name !== "AbortError") notify("Your share link is ready—use Copy link."); }
+  });
+  $("copyBtn").addEventListener("click", async () => {
+    try { await copyText(shareUrl()); notify("Card link copied to clipboard!"); }
+    catch (_) { notify("Could not copy automatically. Try selecting the page URL."); }
+  });
+
+  // Draw the card to a high-resolution canvas for PNG export.
+  $("downloadBtn").addEventListener("click", () => {
+    const w = 1200, h = 840, canvas = document.createElement("canvas");
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    const gradients = {
+      blush:["#ffe0ed","#fff2c8","#45264b"], midnight:["#241b48","#5c3a92","#fff8e8"],
+      ocean:["#d9f7ee","#dfe8ff","#164b58"], sunset:["#fff0d9","#ffc9ae","#713a2f"],
+      rose:["#f0e2ff","#ffd7f0","#622c68"], sky:["#d9edff","#c5e7e2","#204a66"]
+    };
+    const colors = gradients[state.theme] || gradients.blush;
+    const bg = ctx.createLinearGradient(0,0,w,h); bg.addColorStop(0,colors[0]); bg.addColorStop(1,colors[1]);
+    ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle = colors[2] + "55"; ctx.lineWidth = 3;
+    ctx.strokeRect(30,30,w-60,h-60); ctx.strokeRect(43,43,w-86,h-86);
+    ctx.fillStyle = colors[2]; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    let topY = 155;
+    const continueDrawing = () => {
+      ctx.font = "58px serif"; ctx.fillText(state.emoji, w/2, topY);
+      ctx.font = "bold 19px sans-serif"; ctx.letterSpacing = "5px";
+      ctx.fillText((occasionKicker[state.occasion] || "A WISH MADE JUST FOR YOU"), w/2, topY + 65);
+      ctx.letterSpacing = "0px";
+    let titleSize = 78; ctx.font = `bold ${titleSize}px Georgia, serif`;
+    while (ctx.measureText(state.title || "A little wish for you").width > w-140 && titleSize > 36) {
+      titleSize -= 3; ctx.font = `bold ${titleSize}px Georgia, serif`;
+    }
+    const titleLines = wrapText(ctx, state.title || "A little wish for you", w-140);
+    let y = 310; titleLines.slice(0,2).forEach(line => {ctx.fillText(line,w/2,y);y+=titleSize*1.08;});
+    ctx.font = "bold 26px sans-serif"; ctx.fillText("To: " + (state.recipient.trim() || "Someone Special"),w/2,y+15);
+    ctx.font = "italic 28px Georgia, serif";
+    const messageLines = wrapText(ctx,state.message,w-210);
+    y += 78;
+    const maxLines = 5, shown = messageLines.slice(0,maxLines);
+    shown.forEach(line => {ctx.fillText(line,w/2,y);y+=39;});
+    ctx.font = "bold 20px sans-serif"; ctx.fillText("WITH LOVE · " + (state.sender.trim() || "Someone who cares"),w/2,Math.min(750,y+30));
+      canvas.toBlob(blob => {
+        if (!blob) { notify("Sorry, this browser couldn't create the image."); return; }
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "wish-card-studio.png";
+        document.body.appendChild(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href),1000);
+        notify("Your card image has been downloaded!");
+      },"image/png");
+    };
+    if (state.photoData) {
+      const img = new Image();
+      img.onload = () => {
+        ctx.save(); ctx.beginPath(); ctx.arc(w/2, 105, 58, 0, Math.PI*2); ctx.clip();
+        const scale = Math.max(116/img.width,116/img.height);
+        const iw = img.width*scale, ih = img.height*scale;
+        ctx.drawImage(img,w/2-iw/2,105-ih/2,iw,ih); ctx.restore();
+        ctx.strokeStyle = "#ffffffaa"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(w/2,105,58,0,Math.PI*2); ctx.stroke();
+        topY = 205; continueDrawing();
+      };
+      img.onerror = () => { topY = 155; continueDrawing(); };
+      img.src = state.photoData;
+    } else { topY = 100; continueDrawing(); }
+  });
+  function wrapText(ctx,text,maxWidth) {
+    const words = String(text || "").split(/\s+/); const lines=[]; let line="";
+    for (const word of words) {
+      const test = line ? line+" "+word : word;
+      if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line=word; }
+      else line=test;
+    }
+    if (line) lines.push(line); return lines;
+  }
+  $("randomBtn").addEventListener("click", () => {
+    const options = Object.keys(occasionDefaults);
+    state.occasion = options[Math.floor(Math.random()*options.length)];
+    [state.emoji,state.title,state.message] = occasionDefaults[state.occasion];
+    state.theme = ["blush","ocean","midnight","sunset","rose","sky"][Math.floor(Math.random()*6)];
+    $("titleInput").value = state.title; $("message").value = state.message;
+    render(); notify("A fresh card idea, just for you!");
+  });
+  $("resetBtn").addEventListener("click", () => {
+    state = {...defaults};
+    $("recipient").value=state.recipient; $("message").value=state.message;
+    $("sender").value=state.sender; $("titleInput").value=state.title; $("photoInput").value="";
+    history.replaceState(null,"",window.location.pathname+window.location.search);
+    render(); notify("Your card has been reset.");
+  });
+  $("photoInput").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) { notify("Please choose an image file."); event.target.value=""; return; }
+    if (file.size > 5 * 1024 * 1024) { notify("Please choose an image smaller than 5 MB."); event.target.value=""; return; }
+    const reader = new FileReader();
+    reader.onload = () => { state.photoData = String(reader.result); render(); notify("Picture added to your card!"); };
+    reader.onerror = () => notify("Could not read that picture. Please try another.");
+    reader.readAsDataURL(file);
+  });
+  $("removePhotoBtn").addEventListener("click", () => {
+    state.photoData = ""; $("photoInput").value = ""; render(); notify("Picture removed.");
+  });
+
+  $("year").textContent = new Date().getFullYear();
+  if (window.location.hash.startsWith("#card=")) {
+    if (!decodeState(window.location.hash.slice(6))) notify("That card link couldn't be opened.");
+  }
+  render();
+})();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged, updateProfile
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, doc, getDoc, setDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import {
+  getStorage, ref as storageRef, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8WXlVjN9-Y2kVz7Z9S3QNL2vxasqDlyQ",
+  authDomain: "wishes-4755d.firebaseapp.com",
+  projectId: "wishes-4755d",
+  storageBucket: "wishes-4755d.firebasestorage.app",
+  messagingSenderId: "597556186303",
+  appId: "1:597556186303:web:546a1702bb252225328a0a",
+  measurementId: "G-9HP5Q5TTQP"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+isSupported().then(ok => { if (ok) getAnalytics(app); }).catch(() => {});
+
+const byId = id => document.getElementById(id);
+let currentUser = null;
+let currentPhotoFile = null;
+let activeMode = "signup";
+let loadedSharedCard = false;
+
+function toast(message) {
+  const el = byId("toast");
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 3200);
+}
+function cardState() {
+  const el = id => byId(id);
+  const occasionBtn = document.querySelector(".occasion.active");
+  const themeBtn = document.querySelector(".template.active");
+  const emojiMap = {Birthday:"🎂",Anniversary:"💐","Thank You":"💛",Wedding:"💍",Congratulations:"🎉","Just Because":"🌷"};
+  return {
+    occasion: occasionBtn?.dataset.occasion || "Birthday",
+    emoji: emojiMap[occasionBtn?.dataset.occasion || "Birthday"] || "🎂",
+    recipient: el("recipient").value.trim(),
+    message: el("message").value,
+    sender: el("sender").value.trim(),
+    title: el("titleInput").value.trim(),
+    theme: themeBtn?.dataset.theme || "blush"
+  };
+}
+function updateAccountButton() {
+  byId("accountBtn").textContent = currentUser
+    ? "👤 " + (currentUser.displayName || currentUser.email || "Account")
+    : "👤 Account";
+  byId("signOutBtn").style.display = currentUser ? "block" : "none";
+}
+function accountMessage(message, warning=false) {
+  byId("accountMessage").textContent = message;
+  byId("accountMessage").classList.toggle("warning", warning);
+}
+function setMode(mode) {
+  activeMode = mode;
+  byId("signupTab").classList.toggle("active", mode === "signup");
+  byId("loginTab").classList.toggle("active", mode === "login");
+  byId("accountTitle").textContent = mode === "signup" ? "Create your account" : "Welcome back";
+  byId("accountSubmit").textContent = mode === "signup" ? "Create account" : "Sign in";
+  byId("accountName").parentElement.style.display = mode === "signup" ? "block" : "none";
+  byId("accountPassword").autocomplete = mode === "signup" ? "new-password" : "current-password";
+  accountMessage("Accounts are managed securely by Firebase Authentication.");
+}
+byId("accountBtn").addEventListener("click", () => {
+  byId("accountModal").classList.add("open");
+  setMode("signup");
+  if (currentUser) accountMessage("Signed in as " + currentUser.email + ". You can sign out below.");
+});
+byId("closeAccount").addEventListener("click", () => byId("accountModal").classList.remove("open"));
+byId("accountModal").addEventListener("click", e => {
+  if (e.target === byId("accountModal")) byId("accountModal").classList.remove("open");
+});
+byId("signupTab").addEventListener("click", () => setMode("signup"));
+byId("loginTab").addEventListener("click", () => setMode("login"));
+byId("accountForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = byId("accountName").value.trim();
+  const email = byId("accountEmail").value.trim();
+  const password = byId("accountPassword").value;
+  try {
+    let credential;
+    if (activeMode === "signup") {
+      credential = await createUserWithEmailAndPassword(auth, email, password);
+      if (name) await updateProfile(credential.user, {displayName:name});
+      await setDoc(doc(db, "users", credential.user.uid), {
+        displayName:name, email:credential.user.email, createdAt:serverTimestamp()
+      }, {merge:true});
+      byId("sender").value = name || "";
+      toast("Account created successfully!");
+    } else {
+      credential = await signInWithEmailAndPassword(auth, email, password);
+      toast("Welcome back!");
+    }
+    byId("accountPassword").value = "";
+    updateAccountButton();
+    setTimeout(() => byId("accountModal").classList.remove("open"), 500);
+  } catch (error) {
+    const messages = {
+      "auth/email-already-in-use":"That email already has an account. Try signing in.",
+      "auth/invalid-email":"Please enter a valid email address.",
+      "auth/weak-password":"Choose a stronger password (at least 6 characters).",
+      "auth/invalid-credential":"Email or password is incorrect.",
+      "auth/network-request-failed":"Network error. Check your internet connection."
+    };
+    accountMessage(messages[error.code] || ("Could not complete account action: " + error.message), true);
+  }
+});
+byId("signOutBtn").addEventListener("click", async () => {
+  try { await signOut(auth); byId("accountModal").classList.remove("open"); toast("Signed out."); }
+  catch (error) { accountMessage("Could not sign out: " + error.message, true); }
+});
+onAuthStateChanged(auth, user => {
+  currentUser = user;
+  updateAccountButton();
+  if (user && user.displayName && !byId("sender").value.trim()) byId("sender").value = user.displayName;
+});
+
+async function uploadCardPhoto(uid, cardId) {
+  if (!currentPhotoFile) return "";
+  const safeName = currentPhotoFile.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80) || "photo";
+  const fileRef = storageRef(storage, `users/${uid}/cards/${cardId}/${Date.now()}-${safeName}`);
+  await uploadBytes(fileRef, currentPhotoFile, {contentType:currentPhotoFile.type});
+  return await getDownloadURL(fileRef);
+}
+byId("photoInput").addEventListener("change", e => {
+  currentPhotoFile = e.target.files?.[0] || null;
+});
+byId("removePhotoBtn").addEventListener("click", () => { currentPhotoFile = null; });
+
+byId("saveOnlineBtn").addEventListener("click", async () => {
+  if (!currentUser) {
+    byId("accountModal").classList.add("open");
+    setMode("signup");
+    accountMessage("Please create an account or sign in before saving a card.");
+    return;
+  }
+  const button = byId("saveOnlineBtn");
+  button.disabled = true; button.textContent = "Saving…";
+  try {
+    const cardRef = await addDoc(collection(db, "cards"), {
+      ...cardState(), ownerUid:currentUser.uid, isPublic:true,
+      photoURL:"", createdAt:serverTimestamp(), updatedAt:serverTimestamp()
+    });
+    let photoURL = "";
+    if (currentPhotoFile) photoURL = await uploadCardPhoto(currentUser.uid, cardRef.id);
+    else {
+      const preview = byId("cardPhoto");
+      if (preview?.src && preview.classList.contains("visible") && preview.src.startsWith("https://")) photoURL = preview.src;
+    }
+    if (photoURL) await setDoc(cardRef, {photoURL, updatedAt:serverTimestamp()}, {merge:true});
+    const shareUrl = new URL(window.location.href);
+    shareUrl.hash = "shared=" + cardRef.id;
+    await navigator.clipboard?.writeText(shareUrl.toString()).catch(()=>{});
+    toast("Card saved online! Share link: " + shareUrl.toString());
+    if (navigator.share) {
+      try { await navigator.share({title:"A wish from WISH CARD STUDIO", text:"I made a card for you!", url:shareUrl.toString()}); } catch (_) {}
+    }
+  } catch (error) {
+    console.error(error);
+    toast("Could not save. Check Firebase setup and security rules.");
+    accountMessage("Save failed: " + error.message, true);
+  } finally {
+    button.disabled = false; button.textContent = "☁ Save online";
+  }
+});
+
+async function loadSharedCard(cardId) {
+  try {
+    const snap = await getDoc(doc(db, "cards", cardId));
+    if (!snap.exists()) { toast("This shared card was not found."); return; }
+    const data = snap.data();
+    if (!data.isPublic) { toast("This card is private."); return; }
+    const occasion = data.occasion || "Birthday";
+    const btn = [...document.querySelectorAll(".occasion")].find(b => b.dataset.occasion === occasion);
+    if (btn) btn.click();
+    const theme = [...document.querySelectorAll(".template")].find(b => b.dataset.theme === (data.theme || "blush"));
+    if (theme) theme.click();
+    byId("recipient").value = data.recipient || "";
+    byId("message").value = data.message || "";
+    byId("sender").value = data.sender || "";
+    byId("titleInput").value = data.title || "";
+    byId("recipient").dispatchEvent(new Event("input", {bubbles:true}));
+    byId("message").dispatchEvent(new Event("input", {bubbles:true}));
+    byId("sender").dispatchEvent(new Event("input", {bubbles:true}));
+    byId("titleInput").dispatchEvent(new Event("input", {bubbles:true}));
+    if (data.photoURL) {
+      const photo = byId("cardPhoto"); photo.src = data.photoURL; photo.classList.add("visible");
+    }
+    loadedSharedCard = true;
+    toast("Shared card loaded!");
+  } catch (error) {
+    console.error(error);
+    toast("Could not load this card. Check Firestore rules.");
+  }
+}
+const hash = window.location.hash;
+if (hash.startsWith("#shared=")) loadSharedCard(decodeURIComponent(hash.slice(8)));
+else if (hash.startsWith("#card=")) {
+  // Support links created by the earlier local-only version too.
+  try {
+    const encoded = hash.slice(6).replace(/-/g,"+").replace(/_/g,"/");
+    const binary = atob(encoded);
+    const state = JSON.parse(new TextDecoder().decode(Uint8Array.from(binary, c=>c.charCodeAt(0))));
+    if (state.occasion) {
+      const btn = [...document.querySelectorAll(".occasion")].find(b=>b.dataset.occasion===state.occasion);
+      if (btn) btn.click();
+      if (state.theme) [...document.querySelectorAll(".template")].find(b=>b.dataset.theme===state.theme)?.click();
+      byId("recipient").value=state.recipient||"";
+      byId("message").value=state.message||"";
+      byId("sender").value=state.sender||"";
+      byId("titleInput").value=state.title||"";
+      ["recipient","message","sender","titleInput"].forEach(id=>byId(id).dispatchEvent(new Event("input",{bubbles:true})));
+    }
+  } catch (_) {}
+}
+</script>
+
+</body>
+</html>
